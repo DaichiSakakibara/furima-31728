@@ -11,8 +11,7 @@
 | first_name      | string  | null: false |
 | last_name_kana  | string  | null: false |
 | first_name_kana | string  | null: false |
-| birth_month     | integer | null: false |
-| birth_day       | integer | null: false |
+| birth_day       | date    | null: false |
 
 
 ### Association
@@ -23,16 +22,17 @@
 
 ## items テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| title           | text       | null: false                    |
-| text            | text       | null: false                    |
-| category        | text       | null: false                    |
-| which_pay       | text       | null: false                    |
-| where_send      | text       | null: false                    |
-| how_long_days   | integer    | null: false                    |
-| price           | integer    | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| title            | string     | null: false                    |
+| text             | text       | null: false                    |
+| category_id      | integer    | null: false                    |
+| item_status_id   | integer    | null: false                    |
+| which_pay_id     | integer    | null: false                    |
+| where_send_id    | integer    | null: false                    |
+| how_long_days_id | integer    | null: false                    |
+| price            | string     | null: false                    |
+| user_id          | references | null: false, foreign_key: true |
 
 
 
@@ -40,15 +40,20 @@
 
 - belongs_to :user
 - has_one :order 
+- belongs_to :category
+- belongs_to :item_status
+- belongs_to :which_pay
+- belongs_to :where_send
+- belongs_to :how_long_days
+
+
+
+
 
 ## orders テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| card_number     | integer    | null: false                    |
-| card_month      | integer    | null: false                    |
-| card_year       | integer    | null: false                    |
-| security_code   | integer    | null: false                    |
 | user_id         | references | null: false, foreign_key: true |
 | item_id         | references | null: false, foreign_key: true |
 
@@ -63,14 +68,15 @@
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| post_number     | integer    | null: false                    |
-| prefectures     | string     | null: false                    |
+| post_number     | string     | null: false                    |
+| prefectures_id  | integer    | null: false                    |
 | municipality    | text       | null: false                    |
 | address_number  | text       | null: false                    |
-| building_name   | text       | null: true                     |
-| phone_number    | integer    | null: false                    
+| building_name   | text       |                                |
+| phone_number    | string     | null: false                    |
 | oder_id         | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :order
+- belongs_to :prefectures
