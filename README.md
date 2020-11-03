@@ -2,6 +2,7 @@
 
 ## users テーブル
 
+
 | Column             | Type    | Options     |
 | ------------------ | ------  | ----------- |
 | nickname           | string  | null: false |
@@ -14,10 +15,12 @@
 | birth_day          | date    | null: false |
 
 
+
 ### Association
 
 - has_many :items
 - has_many :orders
+
 
 
 
@@ -35,11 +38,11 @@
 | user             | references | null: false, foreign_key: true |
 
 
+
 ### Association
 
 - belongs_to :user
 - has_one :order 
-
 
 
 ## orders テーブル
@@ -50,6 +53,7 @@
 | item            | references | null: false, foreign_key: true |
 
 
+
 ### Association
 
 - belongs_to :user
@@ -57,6 +61,7 @@
 - has_one :address
 
 ## addresses テーブル
+
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
@@ -68,6 +73,8 @@
 | phone_number    | string     | null: false                    |
 | order           | references | null: false, foreign_key: true |
 
+
 ### Association
 
 - belongs_to :order
+
