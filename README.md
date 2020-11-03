@@ -1,23 +1,6 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-<<<<<<< Updated upstream
-* How to run the test suite
-=======
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | title            | string     | null: false                    |
@@ -29,15 +12,8 @@ Things you may want to cover:
 | how_long_days_id | integer    | null: false                    |
 | price            | integer    | null: false                    |
 | user_id          | references | null: false, foreign_key: true |
->>>>>>> Stashed changes
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-<<<<<<< Updated upstream
-* ...
-=======
 ### Association
 
 - belongs_to :user
@@ -50,14 +26,12 @@ Things you may want to cover:
 
 
 
-
-
 ## orders テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| user_id         | references | null: false, foreign_key: true |
-| item_id         | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
+| item            | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -82,4 +56,3 @@ Things you may want to cover:
 
 - belongs_to :order
 - belongs_to :prefectures
->>>>>>> Stashed changes
