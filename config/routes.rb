@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
-  devise_for :users
-  root to: 'home#index'
+ devise_for :users
+ resources :items, only: :index
 end

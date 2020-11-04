@@ -21,7 +21,7 @@
 - has_many :orders
 
 
-
+## items テーブル
 
 
 | Column           | Type       | Options                        |
