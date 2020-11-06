@@ -9,13 +9,6 @@ describe User do
       it 'nicknameとemail、passwordとpassword_confirmation、last&first_name及びkanaが存在すれば登録できる' do
         expect(@user).to be_valid
       end
-      it 'nicknameが6文字以下で登録できる' do
-      end
-      it 'passwordが6文字以上であれば登録できる' do
-        @user.password = 'abc456'
-        @user.password_confirmation = 'abc456'
-        expect(@user).to be_valid
-      end
     end
 
     context '新規登録がうまくいかないとき' do
@@ -29,8 +22,33 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include('Nickname is too long (maximum is 6 characters)')
       end
+      it '苗字が漢字・平仮名・カタカナ以外では登録できないこと' do
+        @user.last_name = 'yamada'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid")
+      end   
+      it '名前が漢字・平仮名・カタカナ以外では登録できないこと' do
+        @user.first_name = 'taro'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid")
+      end   
+      it '苗字カナが全角カタカナ以外では登録できないこと' do
+        @user.last_name_kana = '山田'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana is invalid")
+      end   
+      it '名前カナが全角カタカナ以外では登録できないこと' do
+        @user.first_name_kana = '太郎'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana is invalid")
+      end   
       it 'password:半角英数混合(半角英語のみ)' do
         @user.password = 'aaaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it 'password:半角英数混合(半角数字のみ)' do
+        @user.password = '111111'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
@@ -44,7 +62,7 @@ describe User do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include('Email has already been taken')
+        expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
       it 'emailに@が存在しない場合登録できない' do
         @user.email = 'abc.com'
