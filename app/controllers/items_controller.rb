@@ -7,6 +7,8 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    #  item = @item.find(params[:id])
+    # render json: { item: item }
   end
 
   def create
@@ -16,6 +18,11 @@ class ItemsController < ApplicationController
      else
       render :new
     end
+  end
+
+  def calculation
+    price = Item.new(params[:price])
+    render json:{ price: price }
   end
 
   private
