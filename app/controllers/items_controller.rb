@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_session
 
   def index
     @items = Item.all
@@ -7,8 +7,6 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    #  item = @item.find(params[:id])
-    # render json: { item: item }
   end
 
   def create
@@ -31,7 +29,7 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:title, :text, :category_id, :item_status_id, :which_pay_id, :prefectures_id, :how_long_days_id, :price, :image).merge(user_id: current_user.id)
   end
 
-  def move_to_index
-    redirect_to action: :index unless user_signed_in?
+  def move_to_session
+    redirect_to "/users/sign_in" unless user_signed_in?
   end
 end
