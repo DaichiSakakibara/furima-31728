@@ -30,6 +30,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_session
-    redirect_to '/users/sign_in' unless user_signed_in?
+    unless user_signed_in?
+      redirect_to action: :index 
+     end
   end
 end
