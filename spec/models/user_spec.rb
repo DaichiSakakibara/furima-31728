@@ -25,23 +25,23 @@ describe User do
       it '苗字が漢字・平仮名・カタカナ以外では登録できないこと' do
         @user.last_name = 'yamada'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name is invalid")
-      end   
+        expect(@user.errors.full_messages).to include('Last name is invalid')
+      end
       it '名前が漢字・平仮名・カタカナ以外では登録できないこと' do
         @user.first_name = 'taro'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name is invalid")
-      end   
+        expect(@user.errors.full_messages).to include('First name is invalid')
+      end
       it '苗字カナが全角カタカナ以外では登録できないこと' do
         @user.last_name_kana = '山田'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kana is invalid")
-      end   
+        expect(@user.errors.full_messages).to include('Last name kana is invalid')
+      end
       it '名前カナが全角カタカナ以外では登録できないこと' do
         @user.first_name_kana = '太郎'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana is invalid")
-      end   
+        expect(@user.errors.full_messages).to include('First name kana is invalid')
+      end
       it 'password:半角英数混合(半角英語のみ)' do
         @user.password = 'aaaaaaa'
         @user.valid?
@@ -62,7 +62,7 @@ describe User do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include("Email has already been taken")
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
       it 'emailに@が存在しない場合登録できない' do
         @user.email = 'abc.com'

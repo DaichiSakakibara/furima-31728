@@ -12,15 +12,15 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-       redirect_to root_path
-     else
+      redirect_to root_path
+    else
       render :new
     end
   end
 
   def calculation
     price = Item.new(params[:price])
-    render json:{ price: price }
+    render json: { price: price }
   end
 
   private
@@ -30,6 +30,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_session
-    redirect_to "/users/sign_in" unless user_signed_in?
+    redirect_to '/users/sign_in' unless user_signed_in?
   end
 end

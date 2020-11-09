@@ -5,7 +5,8 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :title
     validates :text
-    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 } 
+    validates :image
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   end
 
   with_options numericality: { other_than: 1 } do
@@ -22,5 +23,4 @@ class Item < ApplicationRecord
   belongs_to :which_pay
   belongs_to :prefecture
   belongs_to :how_long_day
- 
 end
