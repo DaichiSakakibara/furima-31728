@@ -65,7 +65,7 @@
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | post_number     | string     | null: false                    |
-| prefectures_id  | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
 | municipality    | string     | null: false                    |
 | address_number  | string     | null: false                    |
 | building_name   | string     |                                |
