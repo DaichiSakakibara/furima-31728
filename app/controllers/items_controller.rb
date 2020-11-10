@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
-
+  before_action :move_to_index, except: [:index, :show, :edit]
   def index
     @items = Item.all.order('created_at DESC').includes(:user)
   end
@@ -22,9 +21,23 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  # def edit
-    # @item = Item.find(params[:id])
-  # end
+  def edit
+    @item = Item.find(params[:id])
+    if user_signed_in? != true
+      redirect_to user_session_path
+    elsif current_user.id != @item.user.id
+      redirect_to items_path
+    end
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.save
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
 
   # def destroy
   #   item = Item.find(params[:id])
