@@ -126,18 +126,17 @@
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
 
- <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
       <% @items.each do |item| %>
       <li class='list'>
         <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" if item.image.attached? %>
 
-         <% if item ＝= nil %>
-          <div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div>
-         <% end %>
+         <%# if item ＝= nil %>
+          <%# <div class='sold-out'> %>
+            <%# <span>Sold Out!!</span> %>
+          <%# </div> %>
+         <%# end %>
 
         </div>
         <div class='item-info'>
@@ -156,7 +155,6 @@
       </li>
       <% end %>
 
-      <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
       <% if @items == nil %>
       <%# 商品がない場合のダミー %>
       <li class='list'>
