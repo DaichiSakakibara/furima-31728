@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show, :edit]
-  before_action :set_item, only: [:edit, :show, :update]
+  before_action :set_item, only: [:edit, :show, :update, :destroy]
+  before_action :authenticate_user! except: [:index, :show ]
   def index
     @items = Item.all.order('created_at DESC').includes(:user)
   end
@@ -22,9 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if user_signed_in? != true
-      redirect_to user_session_path
-    elsif current_user.id != @item.user.id
+    if current_user.id != @item.user.id
       redirect_to items_path
     end
   end
@@ -37,10 +35,14 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   item = Item.find(params[:id])
-  #   item.destroy
-  # end
+   def destroy
+    if current_user.id != @item.user.id
+      redirect_to items_path
+    else
+    @item.destroy
+      redirect_to root_path
+    end
+  end
 
   def calculation
     price = Item.new(params[:price])
@@ -57,7 +59,4 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def move_to_index
-    redirect_to items_path unless user_signed_in?
-  end
 end
