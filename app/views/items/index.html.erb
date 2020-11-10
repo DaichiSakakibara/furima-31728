@@ -125,9 +125,9 @@
     <h2 class='title'>ピックアップカテゴリー</h2>
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
-
-      <% @items.each do |item| %>
+      <% if @items %>
       <li class='list'>
+      <% @items.each do |item| %>
         <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" if item.image.attached? %>
@@ -152,10 +152,9 @@
           </div>
         </div>
        <% end %>
-      </li>
       <% end %>
-
-      <% if @items == nil %>
+      </li>
+      <% else %>
       <%# 商品がない場合のダミー %>
       <li class='list'>
         <%= link_to '#' do %>
@@ -172,8 +171,8 @@
             </div>
           </div>
         </div>
-      </li>
         <% end %>
+      </li>
       <%# /商品がない場合のダミー %>
       <% end %>
     </ul>
