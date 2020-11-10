@@ -19,7 +19,7 @@
       <%="¥ #{@item.price}"%>
       </span>
       <span class="item-postage">
-     <%= WhichPay.find(@item.which_pay_id)[:name] %>
+     <%= @item.which_pay.name %>
       </span>
     </div>
 <% if user_signed_in? %>
@@ -54,11 +54,11 @@
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= Prefecture.find(@item.prefectures_id)[:name] %></td>
+          <td class="detail-value"><%= @item.prefecture.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%=  HowLongDay.find(@item.how_long_days_id)[:name] %></td>
+          <td class="detail-value"><%=  @item.how_long_day.name %></td>
         </tr>
       </tbody>
     </table>

@@ -13,8 +13,8 @@ class Item < ApplicationRecord
     validates :category_id
     validates :item_status_id
     validates :which_pay_id
-    validates :prefectures_id
-    validates :how_long_days_id
+    validates :prefecture_id
+    validates :how_long_day_id
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
