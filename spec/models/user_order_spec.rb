@@ -57,6 +57,11 @@ RSpec.describe UserOrder, type: :model do
       @user_order.valid?
       expect(@user_order.errors.full_messages).to include("Phone number can't be blank")
     end
+    it 'phone_numberがハイフンを含むと保存できないこと' do
+      @user_order.phone_number = '090-123-456'
+      @user_order.valid?
+      expect(@user_order.errors.full_messages).to include("Phone number can be up to 11 digits")
+    end
     it 'phone_numberが12桁だと保存できないこと' do
       @user_order.phone_number = "090123456789"
       @user_order.valid?
