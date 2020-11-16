@@ -6,9 +6,13 @@ RSpec.describe UserOrder, type: :model do
       @user_order = FactoryBot.build(:user_order)
     end
 
-    it 'すべての値が正しく入力されていれば保存できること' do
-      expect(@user_order).to be_valid
+    context '商品購入がうまくいくとき' do
+      it 'すべての値が正しく入力されていれば保存できること' do
+        expect(@user_order).to be_valid
+      end
     end
+
+    context '商品購入がうまくいかないとき' do
     it "priceが空では登録できないこと" do
       @user_order.price = nil
       @user_order.valid?
@@ -44,10 +48,6 @@ RSpec.describe UserOrder, type: :model do
       @user_order.valid?
       expect(@user_order.errors.full_messages).to include("Address number can't be blank")
     end
-    it 'building_nameは空でも保存できること' do
-      @user_order.building_name = nil
-      expect(@user_order).to be_valid
-    end
     it 'phone_numberが空だと保存できないこと' do
       @user_order.phone_number = nil
       @user_order.valid?
@@ -58,5 +58,6 @@ RSpec.describe UserOrder, type: :model do
       @user_order.valid?
       expect(@user_order.errors.full_messages).to include("Phone number can be up to 11 digits")
     end
+  end
   end
 end
